@@ -122,16 +122,16 @@ BEGIN
         
         readLoop: LOOP
             FETCH doctorCursor INTO doctorID, surgeryCount;
-			IF done THEN 
-				LEAVE readLoop;
-			END IF;
+	    IF done THEN 
+		LEAVE readLoop;
+	    END IF;
             
-		UPDATE salaryPayments
-        SET monthlyBonus = monthlyBonus + (surgeryCount * bonusPerSurgery)
-		WHERE doctor_id = doctorID
+	    UPDATE salaryPayments
+            SET monthlyBonus = monthlyBonus + (surgeryCount * bonusPerSurgery)
+	    WHERE doctor_id = doctorID
             AND monthOfPayment = month
             AND yearOfPayment = year;
-		END LOOP;
+	END LOOP;
         
         CLOSE doctorCursor;
         COMMIT;
